@@ -18,7 +18,6 @@ class CatController
         $repo = new EntityRepository($entityManager, new ClassMetadata("App\Entity\Cat"));
 
         $Cat = $repo->findAll();
-        var_dump($Cat);
 
         if ($_SESSION['email']) {
             echo ("<br>email found, we consider you logged in<br>");
@@ -30,7 +29,8 @@ class CatController
         include "./src/Views/cat_home.php";
     }
 
-    public static function displayAllcats() {
+    public static function displayAllcats()
+    {
         $entityManager = Em::getEntityManager();
         $repo = new EntityRepository($entityManager, new ClassMetadata("App\Entity\Cat"));
         $aCat = $repo->findAll();
@@ -38,9 +38,10 @@ class CatController
     }
 
     const NEEDS = [
-        "puce",
+        "nb_puce",
         "description",
-        "bar"
+        "numero_bar",
+        "send"
     ];
 
     public static function showAddCat()
@@ -53,35 +54,39 @@ class CatController
     {
         echo ("Function add cat");
         var_dump($_POST);
+
         if (!empty($_POST)) {
             foreach (self::NEEDS as $value) {
                 if (!array_key_exists($value, $_POST)) {
+                    $_POST[$value] = htmlentities(strip_tags($_POST[$value]));
                     echo "Il manque des champs à replir";
                     include("./src/Views/cat_register.php");
                     exit;
                 }
-                $_POST[$value] = htmlentities(strip_tags($_POST[$value]));
             }
-            // int $puceNum, string $description, Bar $adress, Bar $enseigne, string $statut)
         }
 
         if ($_POST['description'] == "")
             $description = "Default description";
-
-        $entityManager = Em::getEntityManager();
-        $repo = new EntityRepository($entityManager, new ClassMetadata("App\Entity\Bar"));
-
-
-        echo ("<br>a");
-        $bar = $repo->find($_POST['numero_bar']);
-        var_dump($bar);
+        else {
+            $description = $_POST['description'];
+        }
 
 
-        $Cat = new Cat($_POST['nb_puce'], $description, $bar);
-        var_dump($Cat);
-        $entityManager = Em::getEntityManager();
-        $entityManager->persist($Cat);
+
+
         try {
+            $entityManager = Em::getEntityManager();
+            $repo = new EntityRepository($entityManager, new ClassMetadata("App\Entity\Bar"));
+
+
+
+            $bar = $repo->find(number_format($_POST['numero_bar']));
+            var_dump($bar);
+
+            $Cat = new Cat($_POST['nb_puce'], $description, $bar);
+            $entityManager = Em::getEntityManager();
+            $entityManager->persist($Cat);
             $entityManager->flush();
             header('Location: http://localhost/NoodCat');
         } catch (\Throwable $th) {

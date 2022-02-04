@@ -9,15 +9,15 @@
     <div class="mainbody">
         <div class="container">
             <h1>
-                Cat list page
+                Cat page
             </h1>
-            <p>
-                <a href="/cats_add">Ajouter un nouveau chat</a>
-            </p>
-            <p>
-                <a href="/cat_add_random">Ajouter un nouveau chat random</a>
-            </p>
 
+            <nav class="nav flex-column">
+                <a class="nav-link" href="/cats_list">Listes des chats</a>
+                <a class="nav-link" href="/cats_add">Ajouter un nouveau chat</a>
+                <a class="nav-link" href="/cat_add_random">Ajouter un nouveau chat random</a>
+                <a class="nav-link disabled">Disabled</a>
+            </nav>
         </div>
     </div>
 

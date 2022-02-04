@@ -35,7 +35,7 @@ $router->post("/login", "App\Controller\UserController@login");
 
 //Cats
 $router->get("/cats", "App\Controller\CatController@index");
-$router->get("/showcats", "App\Controller\CatController@displayAllcats");
+$router->get("/cats_list", "App\Controller\CatController@displayAllcats");
 $router->get("/cats_add", "App\Controller\CatController@showAddCat");
 $router->post("/cats_add", "App\Controller\CatController@addCat");
 $router->get("/cat_add_random", "App\Controller\CatController@AddRandomCat");
