@@ -69,6 +69,7 @@ class BarController
             // header('Location: "./src/Views/bar_list.php"');
         } catch (\Throwable $th) {
             echo $th->getMessage();
+            header( "refresh:5;url=/bar"); 
         }
     }
 
@@ -83,6 +84,7 @@ class BarController
             header('Location: http://NoodCat/showbars');
         } catch (\Throwable $th) {
             echo $th->getMessage();
+            header( "refresh:5;url=/bar"); 
         }
     }
 }

@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\DiscriminatorMap({"cashier" = "Cashier", "manager" = "Manager", "client" = "Client"})
  * @ORM\Table(name="User",uniqueConstraints={@ORM\UniqueConstraint(name="emailConstraint", columns={"email"})})
  */
-class User
+abstract class User
 {
     /**
      * @ORM\Id

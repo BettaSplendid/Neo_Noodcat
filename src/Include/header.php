@@ -1,6 +1,4 @@
 <header>
-    <?php echo ("Session : ");
-    echo (var_dump($_SESSION)) ?>
     <div class="bg-primary bg-opacity-25">
 
         <ul class="nav justify-content-end texte-white">

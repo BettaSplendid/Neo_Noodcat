@@ -72,16 +72,13 @@ class CatController
             $description = $_POST['description'];
         }
 
-
-
-
         try {
             $entityManager = Em::getEntityManager();
             $repo = new EntityRepository($entityManager, new ClassMetadata("App\Entity\Bar"));
 
 
 
-            $bar = $repo->find(number_format($_POST['numero_bar']));
+            $bar = $repo->find((int)number_format($_POST['numero_bar']));
             var_dump($bar);
 
             $Cat = new Cat($_POST['nb_puce'], $description, $bar);
@@ -91,6 +88,7 @@ class CatController
             header('Location: http://localhost/NoodCat');
         } catch (\Throwable $th) {
             echo $th->getMessage();
+            header( "refresh:5;url=/cats_add"); 
         }
     }
 
@@ -111,6 +109,7 @@ class CatController
             header('Location: http://NoodCat/cats');
         } catch (\Throwable $th) {
             echo $th->getMessage();
+            header( "refresh:5;url=/cats"); 
         }
     }
 }

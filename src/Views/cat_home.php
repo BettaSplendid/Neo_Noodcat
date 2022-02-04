@@ -16,7 +16,6 @@
                 <a class="nav-link" href="/cats_list">Listes des chats</a>
                 <a class="nav-link" href="/cats_add">Ajouter un nouveau chat</a>
                 <a class="nav-link" href="/cat_add_random">Ajouter un nouveau chat random</a>
-                <a class="nav-link disabled">Disabled</a>
             </nav>
         </div>
     </div>

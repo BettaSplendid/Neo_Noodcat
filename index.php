@@ -1,10 +1,12 @@
 <?php
+session_start();
 
 use Router\Router;
 
-require_once('vendor/autoload.php');
+require_once('vendor/autoload.php');;
 
 $router = new Router($_GET['url']);
+
 if (isset($_SESSION)) {
     switch ($_SESSION['type']) {
         case "client":
@@ -28,10 +30,13 @@ if (isset($_SESSION)) {
 
 $router->get("/", "App\Controller\AppController@index");
 
+
+//User
 $router->get("/register", "App\Controller\UserController@showregister");
 $router->post("/register", "App\Controller\UserController@register");
 $router->get("/login", "App\Controller\UserController@showLogin");
 $router->post("/login", "App\Controller\UserController@login");
+$router->get("/user_random", "App\Controller\UserController@AddRandomUser");
 
 //Cats
 $router->get("/cats", "App\Controller\CatController@index");
@@ -43,9 +48,14 @@ $router->get("/cat_add_random", "App\Controller\CatController@AddRandomCat");
 
 //Bar
 $router->get("/bar", "App\Controller\BarController@index");
+$router->get("/bars", "App\Controller\BarController@index");
 $router->get("/showbars", "App\Controller\BarController@displayAllBars");
 $router->get("/add_Bar", "App\Controller\BarController@showAddBar");
-$router->post("/add_Bar", "App\Controller\BarController@addBar"); 
+$router->post("/add_Bar", "App\Controller\BarController@addBar");
 $router->get("/add_random_bar", "App\Controller\BarController@AddRandomBar");
+
+
+
+
 //Final
 $router->run();

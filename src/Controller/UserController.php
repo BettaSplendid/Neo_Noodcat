@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\EntityRepository;
 use App\Entity\User;
 use \DateTime;
+use Faker;
 
 class UserController
 {
@@ -37,16 +38,17 @@ class UserController
             }
 
 
-            $d =  new DateTime();
-            $user = new Client($_POST["firstname"], $_POST["lastname"], $_POST["email"], password_hash($_POST["password"], PASSWORD_DEFAULT), $d, $_POST["identityCard"]);
-
-            $entityManager = Em::getEntityManager();
-            $entityManager->persist($user);
             try {
+                $d =  new DateTime();
+                $user = new Client($_POST["firstname"], $_POST["lastname"], $_POST["email"], password_hash($_POST["password"], PASSWORD_DEFAULT), $d, $_POST["identityCard"]);
+
+                $entityManager = Em::getEntityManager();
+                $entityManager->persist($user);
                 $entityManager->flush();
                 header('Location: http://NoodCat');
             } catch (\Throwable $th) {
                 echo $th->getMessage();
+                header("refresh:5;url=/cats");
             }
         }
     }
@@ -99,9 +101,23 @@ class UserController
             $_SESSION['firstname'] = $user[0]->getFirstname();
             $_SESSION['type'] = strtolower(str_replace("App\Entity\\", "", get_class($user[0])));
 
-            echo("test");
-            // include("./src/Views/home.php");
+            echo ("test");
+            header('location:/');
+        }
+    }
 
+    public function AddRandomUser()
+    {
+        $faker = Faker\Factory::create();
+        $entityManager = Em::getEntityManager();
+        $User = new User($faker->lastName,$faker->firstname,$faker->email,$faker->userName, new DateTime());
+        $entityManager->persist($User);
+        try {
+            $entityManager->flush();
+            header('Location: http://NoodCat/showUsers');
+        } catch (\Throwable $th) {
+            echo $th->getMessage();
+            header("refresh:5;url=/User");
         }
     }
 }
