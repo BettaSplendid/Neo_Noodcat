@@ -2,8 +2,14 @@
 
 namespace App\Controller;
 
-use App\Helpers\EntityManagerHelper as Em;
+require_once 'vendor/autoload.php';
+
+use Faker;
 use App\Entity\Bar;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Mapping\ClassMetadata;
+use App\Helpers\EntityManagerHelper as Em;
+
 
 class BarController
 {
@@ -17,11 +23,14 @@ class BarController
     {
 
 
+        $entityManager = Em::getEntityManager();
+        $repo = new EntityRepository($entityManager, new ClassMetadata("App\Entity\Bar"));
+        $aBar = $repo->findAll();
         include "./src/Views/bar_list.php";
     }
 
     const NEEDS = [
-        "adresse",
+        "bar_adress",
         "nom"
     ];
 
@@ -31,7 +40,7 @@ class BarController
     }
     public static function addBar()
     {
-        echo ("Thing");
+        echo ("<br>Add bar()<br>");
         var_dump($_POST);
 
         if (empty($_POST)) {
@@ -47,9 +56,9 @@ class BarController
 
         $_POST[$value] = htmlentities(strip_tags($_POST[$value]));
 
-        echo ("azazza");
+        echo ("<br>Creating bar<br>");
 
-        $Bar = new Bar($_POST["puce"], $_POST["numero_bar"]);
+        $Bar = new Bar($_POST["bar_adress"], $_POST["bar_name"]);
 
         echo ("bar created");
         $entityManager = Em::getEntityManager();
@@ -57,7 +66,21 @@ class BarController
 
         try {
             $entityManager->flush();
-            header('Location: http://localhost/NoodCat');
+            // header('Location: "./src/Views/bar_list.php"');
+        } catch (\Throwable $th) {
+            echo $th->getMessage();
+        }
+    }
+
+    public function AddRandomBar()
+    {
+        $faker = Faker\Factory::create();
+        $entityManager = Em::getEntityManager();
+        $Bar = new Bar($faker->address, $faker->company);
+        $entityManager->persist($Bar);
+        try {
+            $entityManager->flush();
+            header('Location: http://NoodCat/showbars');
         } catch (\Throwable $th) {
             echo $th->getMessage();
         }

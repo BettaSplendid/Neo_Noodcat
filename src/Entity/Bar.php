@@ -15,10 +15,10 @@ class Bar {
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    private int $bar_id;
 
     /**
-     * @ORM\Column(length="100")
+     * @ORM\Column(length="100", nullable=true)
      */   
     private string $enseigne;
 
@@ -34,13 +34,7 @@ class Bar {
     }
     
 
-    /**
-     * Get the value of id
-     */ 
-    public function getId() : int
-    {
-        return $this->id;
-    }
+
 
     /**
      * Get the value of name
@@ -78,6 +72,26 @@ class Bar {
     public function setAdress(string $adress) : self
     {
         $this->adress = $adress;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of bar_id
+     */ 
+    public function getBar_id()
+    {
+        return $this->bar_id;
+    }
+
+    /**
+     * Set the value of bar_id
+     *
+     * @return  self
+     */ 
+    public function setBar_id($bar_id)
+    {
+        $this->bar_id = $bar_id;
 
         return $this;
     }

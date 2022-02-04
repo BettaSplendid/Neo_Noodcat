@@ -8,8 +8,8 @@
     <div class="form_container">
         <form method="post">
             <h1>Formulaire de creation bar</h1>
-            <input type="text" name="adresse" placeholder="adresse" required>
-            <input type="text" name="nom" placeholder="nom" required>
+            <input type="text" name="bar_adress" placeholder="bar_adress" required>
+            <input type="text" name="bar_name" placeholder="nom" required>
             <input type="submit" name="send" value="envoyer">
         </form>
     </div>

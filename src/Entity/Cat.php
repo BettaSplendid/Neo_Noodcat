@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
+ * @ORM\Table(name="Cat",uniqueConstraints={@ORM\UniqueConstraint(name="puceNumConstraint", columns={"puceNum"})})
  */
 final class Cat {
 
@@ -14,7 +15,7 @@ final class Cat {
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    private int $cat_id;
 
     /**
      * @ORM\GeneratedValue
@@ -27,6 +28,11 @@ final class Cat {
      */
     private string $description;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Bar") 
+     * @ORM\JoinColumn(name="bar_id", referencedColumnName="bar_id")
+     */
+    private Bar $enseigne;
 
      /**
      * @ORM\Column(length="100", nullable=true)
@@ -38,6 +44,7 @@ final class Cat {
         $this->puceNum = $puceNum;
         $this->description = $description;
         $this->enseigne = $enseigne;
+        $this->statut = "default value";
     }
 
 

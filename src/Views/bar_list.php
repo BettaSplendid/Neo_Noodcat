@@ -8,20 +8,34 @@
     <div class="mainbody">
         <div class="mainbody_primary">
 
-            <h1>Liste des bars</h1>
-            <?php
+            <div class="container">
 
-            use App\Helpers\EntityManagerHelper as Em;
-            use Doctrine\ORM\Mapping\ClassMetadata;
-            use Doctrine\ORM\EntityRepository;
-            use App\Entity\Bar;
-            use \DateTime;
 
-            $entityManager = Em::getEntityManager();
-            $repo = new EntityRepository($entityManager, new ClassMetadata("App\Entity\Bar"));
+                <h1>Liste des bars</h1>
+                <table class="table table-primary table-bordered">
+                    <thead>
+                        <th>Id:</th>
+                        <th>Nom:</th>
+                        <th>Adresse:</th>
+                    </thead>
+                    <?php
 
-            $Bar = $repo->findAll();
-            var_dump($Bar); ?>
+                    foreach ($aBar as $keybar) :
+                        // var_dump($aBar); 
+                    ?>
+
+                        <tr>
+                            <td class="col"> <?= $keybar->getBar_id() ?> </td>
+                            <td class="col"> <?= $keybar->getName() ?> </td>
+                            <td class="col"> <?= $keybar->getAdress() ?> </td>
+                        </tr>
+
+
+
+                    <?php endforeach ?>
+                </table>
+            </div>
+
 
         </div>
     </div>

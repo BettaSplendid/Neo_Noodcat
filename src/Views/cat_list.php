@@ -5,17 +5,40 @@
 
 <body>
     <?php include 'src/Include/header.php'; ?>
-
     <div class="mainbody">
-        <h1>
-            Cat list page
-        </h1>
         <div class="mainbody_primary">
-            <a href="/NoodCat/cats_add">Ajouter un nouveau chat</a>
-            
+
+            <div class="container">
+
+
+                <h1>Liste des bars</h1>
+                <table class="table table-primary table-bordered">
+                    <thead>
+                        <th>Id:</th>
+                        <th>Nom:</th>
+                        <th>Adresse:</th>
+                    </thead>
+                    <?php
+
+                    foreach ($aBar as $keybar) :
+                        // var_dump($aBar); 
+                    ?>
+
+                        <tr>
+                            <td class="col"> <?= $keybar->getBar_id() ?> </td>
+                            <td class="col"> <?= $keybar->getName() ?> </td>
+                            <td class="col"> <?= $keybar->getAdress() ?> </td>
+                        </tr>
+
+
+
+                    <?php endforeach ?>
+                </table>
+            </div>
+
+
         </div>
     </div>
-
     <?php include 'src/Include/footer.php'; ?>
 </body>
 

@@ -11,7 +11,7 @@ use \DateTime;
 
 class UserController
 {
-    public function showSignIn()
+    public function showregister()
     {
         include './src/Views/inscription.php';
     }
@@ -24,7 +24,7 @@ class UserController
         "identityCard"
     ];
 
-    public function addUser()
+    public function register()
     {
         if (!empty($_POST)) {
             foreach (self::NEEDS as $value) {
@@ -44,7 +44,7 @@ class UserController
             $entityManager->persist($user);
             try {
                 $entityManager->flush();
-                header('Location: http://localhost/NoodCat');
+                header('Location: http://NoodCat');
             } catch (\Throwable $th) {
                 echo $th->getMessage();
             }
@@ -99,7 +99,8 @@ class UserController
             $_SESSION['firstname'] = $user[0]->getFirstname();
             $_SESSION['type'] = strtolower(str_replace("App\Entity\\", "", get_class($user[0])));
 
-            include("./src/Views/home.php");
+            echo("test");
+            // include("./src/Views/home.php");
 
         }
     }

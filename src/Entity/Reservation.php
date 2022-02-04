@@ -16,7 +16,7 @@ class Reservation
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    private int $reservation_d;
     /**
      * @ORM\Column(type="datetime")
      */
@@ -31,7 +31,7 @@ class Reservation
 
     /**
      * @ORM\ManyToOne(targetEntity="Cat") 
-     * @ORM\JoinColumn(name="cat_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="cat_id", referencedColumnName="cat_id")
      */
     private Cat $cat;
 

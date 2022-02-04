@@ -14,5 +14,8 @@
         "symfony/http-foundation": "^6.0",
         "laminas/laminas-mail": "^2.15",
         "doctrine/annotations": "^1.13"
+    },
+    "require-dev": {
+        "fzaninotto/faker": "^1.5"
     }
 }

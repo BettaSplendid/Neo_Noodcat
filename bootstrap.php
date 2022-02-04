@@ -23,10 +23,10 @@ $config->setAutoGenerateProxyClasses(1);
 
 $conn = array(
     'driver' => 'pdo_mysql',
-    'user'     => "106139_groupe2",
-    'password' => "tibzaq-1fifwa-soxVim",
-    'dbname'   => "pawolanmwen_gp2",
-    'host'     => "mysql-pawolanmwen.alwaysdata.net"
+    'user'     => getenv('APP_USER'),
+    'password' => getenv('APP_PASS'),
+    'dbname'   => getenv('APP_BDD'),
+    'host'     => getenv('APP_HOST')
 );
 
 // obtaining the entity manager
